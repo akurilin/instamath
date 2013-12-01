@@ -63,4 +63,6 @@
   (is (= 4 (math-eval "√(16)")))
   (is (= 4 (math-eval "√(4*4)"))))
 
-(deftest variables)
+(deftest variables
+  (is (= 13 (math-eval "x + 7" {:x 6})))
+  (is (= 7 (math-eval "x + y" {:x 4 :y 3}))))

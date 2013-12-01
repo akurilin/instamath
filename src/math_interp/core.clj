@@ -5,9 +5,11 @@
 ; To Investigate:
 ; * whitespace preprocessing vs whitespace in grammar
 
+; grammar is stored in a separate file to avoid character escaping headaches
 (def math (insta/parser (slurp "grammar.ebnf")))
 
 (defn pick-op
+  "Convert operation terminal to corresponding Clojure function"
   [op]
   (case op
     "+" +
@@ -22,7 +24,14 @@
   ([op a] (op a))
   ([a op b] (op a b)))
 
-(def transform-options
+(defn interpolate
+  "Lookup variable value in env map"
+  [env variable]
+  ((keyword variable) env))
+
+(defn transform-options
+  "How to transform each production head"
+  [env]
   {:expr operation
    :term operation
    :factor operation
@@ -30,24 +39,19 @@
    :multdiv pick-op
    :exp pick-op
    :sqrt pick-op
+   :variable (partial interpolate env)
    :number identity
    :integer #(Long/parseLong %)
    :floating #(Double/parseDouble %)})
 
 (defn math-eval
-  [source & options]
-  (->> (clojure.string/replace source #"\s+" "")
-       ((fn [x] (if (:show-ambiguity (first options))
-                 (insta/parses math x)
-                 (insta/parse math x))))
-       ; ((fn [tree] (do (clojure.pprint/pprint tree) tree)))
-       ; ((fn [tree] (do (insta/visualize tree :output-file "out.png") tree)))
-       (insta/transform transform-options)
-       ; ((fn [res] (do (clojure.pprint/pprint res) res)))
-       ))
-
-; (math-eval "1+1")
-; (math-eval "1+1+1+1/2*2")
-; (math-eval "-1")
-; (math-eval "2^6")
-; (math-eval "√(4*1)")
+  "Main eval function. One of the arities takes an env map"
+  ([source] (math-eval source {}))
+  ([source env]
+   (->> (clojure.string/replace source #"\s+" "")
+        ((partial insta/parse math))
+        ; ((fn [tree] (do (clojure.pprint/pprint tree) tree)))
+        ; ((fn [tree] (do (insta/visualize tree :output-file "out.png") tree)))
+        (insta/transform (transform-options env))
+        ; ((fn [res] (do (clojure.pprint/pprint res) res)))
+        )))
