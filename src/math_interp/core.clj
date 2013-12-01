@@ -15,10 +15,11 @@
     "*" *
     "/" /
     "^" tower/expt
-    ))
+    "√" tower/sqrt))
 
 (defn operation
   ([a] a)
+  ([op a] (op a))
   ([a op b] (op a b)))
 
 (def transform-options
@@ -27,7 +28,8 @@
    :factor operation
    :addsub pick-op
    :multdiv pick-op
-   :expsqrt pick-op
+   :exp pick-op
+   :sqrt pick-op
    :number identity
    :integer #(Long/parseLong %)
    :floating #(Double/parseDouble %)})
@@ -48,3 +50,4 @@
 ; (math-eval "1+1+1+1/2*2")
 ; (math-eval "-1")
 ; (math-eval "2^6")
+; (math-eval "√(4*1)")
