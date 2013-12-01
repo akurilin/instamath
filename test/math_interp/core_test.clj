@@ -1,4 +1,5 @@
 (ns math-interp.core-test
+  (:refer-clojure :exclude [doubles])
   (:require [clojure.test :refer :all]
             [math-interp.core :refer :all]))
 
@@ -42,7 +43,10 @@
   (is (= 5 (math-eval "2 / 2 + 2 * 2")))
   (is (= 5 (math-eval "3 * 2 - 1 + 3 / 3 - 1"))))
 
-(deftest negative-numbers)
+(deftest unary-operators
+  (is (= -1 (math-eval "-1")))
+  (is (= -0.1 (math-eval "-0.1")))
+  (is (= 0 (math-eval "1+-1"))))
 
 (deftest parentheses
   (is (= 3 (math-eval "1 + (1 + 1)")))

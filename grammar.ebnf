@@ -5,5 +5,5 @@ number = integer | floating | lparen expr rparen
 <rparen> = <")">
 addsub = "+" | "-"
 multdiv = "/" | "*"
-floating = #"\d+\.\d+"
-integer = #"\d+"
+floating = #"-{0,1}\d+\.\d+"
+integer = #"-{0,1}\d+"

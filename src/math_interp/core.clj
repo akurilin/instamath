@@ -1,7 +1,7 @@
 (ns math-interp.core
   (:require [instaparse.core :as insta]))
 
-; Questions:
+; To Investigate:
 ; * whitespace preprocessing vs whitespace in grammar
 
 (def math (insta/parser (slurp "grammar.ebnf")))
@@ -12,14 +12,11 @@
     "+" +
     "-" -
     "*" *
-    "/" /
-    )
-  )
+    "/" /))
 
 (defn operation
   ([a] a)
-  ([a op b]
-   (op a b)))
+  ([a op b] (op a b)))
 
 (def transform-options
   {:expr operation
@@ -44,3 +41,4 @@
 
 ; (math-eval "1+1")
 ; (math-eval "1+1+1+1/2*2")
+; (math-eval "-1")
