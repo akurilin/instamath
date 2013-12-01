@@ -18,6 +18,12 @@
   (is (= 8 (math-eval "10 - 2")))
   (is (= -2 (math-eval "4 - 6"))))
 
+(deftest division
+  (is (= 2 (math-eval "8 / 4"))))
+
+(deftest multiplication
+  (is (= 10 (math-eval "5 * 2"))))
+
 (deftest coercion
   (let [res (math-eval "1 + 0.55")]
     (is (== (+ 1 0.55) res))
@@ -29,6 +35,7 @@
 
 (deftest addition-multiple-operands)
 
-(deftest operator-precedence)
+(deftest operator-precedence
+  )
 
 (deftest negative-numbers)

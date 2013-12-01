@@ -1,6 +1,6 @@
 expr = number | operation
 operation = number op number
-op = "+" | "-"
+op = "+" | "-" | "/" | "*"
 number = integer | floating
 floating = #"\d+\.\d+"
 integer = #"\d+"
