@@ -61,11 +61,15 @@
   (testing "right-associativity of ^"
     (is (= 512 (math-eval "2^3^2")))))
 
+; TODO: √ and ^ associativity will be really confusing to most people
+; and needs to be fixed by mandating the use of parentheses.
 (deftest square-root
   (is (= 4 (math-eval "√(16)")))
   (is (= 4 (math-eval "√(4*4)")))
   (testing "nesting of square roots"
-    (is (= 2 (math-eval "√√16")))))
+    (is (= 2 (math-eval "√√16"))))
+  (testing "square root and exp associativity"
+    (is (= 65536 (math-eval "√4^4^2")))))
 
 (deftest variables
   (is (= 13 (math-eval "x + 7" {:x 6})))
