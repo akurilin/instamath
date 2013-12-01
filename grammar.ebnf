@@ -1,0 +1,6 @@
+expr = number | operation
+operation = number op number
+op = "+"
+number = integer | floating
+floating = #"\d+\.\d+"
+integer = #"\d+"
