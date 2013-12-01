@@ -43,5 +43,12 @@
   (is (= 5 (math-eval "3 * 2 - 1 + 3 / 3 - 1"))))
 
 (deftest negative-numbers)
+
 (deftest parentheses
-  (is (= 3 (math-eval "1 + (1 + 1)"))))
+  (is (= 3 (math-eval "1 + (1 + 1)")))
+  (is (= 16 (math-eval "(4 + 4) * 2")))
+  (is (= 5 (math-eval "(1 + (1 + 1 + (1 + 1)))"))))
+
+(deftest exponent)
+(deftest square-root)
+(deftest variables)
