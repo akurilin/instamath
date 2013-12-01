@@ -14,6 +14,10 @@
 (deftest addition
   (is (= 2 (math-eval "1 + 1"))))
 
+(deftest subtraction
+  (is (= 8 (math-eval "10 - 2")))
+  (is (= -2 (math-eval "4 - 6"))))
+
 (deftest coercion
   (let [res (math-eval "1 + 0.55")]
     (is (== (+ 1 0.55) res))
@@ -24,3 +28,7 @@
   (is (= 2 (math-eval "   1    +    1  "))))
 
 (deftest addition-multiple-operands)
+
+(deftest operator-precedence)
+
+(deftest negative-numbers)
