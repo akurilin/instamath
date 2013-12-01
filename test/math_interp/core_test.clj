@@ -33,9 +33,15 @@
   (is (= 2 (math-eval "1+1")))
   (is (= 2 (math-eval "   1    +    1  "))))
 
-(deftest addition-multiple-operands)
+(deftest addition-multiple-operands
+  (is (= 3 (math-eval "1 + 1 + 1"))))
 
 (deftest operator-precedence
-  )
+  (is (= 3 (math-eval "2 + 2 / 2")))
+  (is (= 6 (math-eval "2 + 2 * 2")))
+  (is (= 5 (math-eval "2 / 2 + 2 * 2")))
+  (is (= 5 (math-eval "3 * 2 - 1 + 3 / 3 - 1"))))
 
 (deftest negative-numbers)
+(deftest parentheses
+  (is (= 3 (math-eval "1 + (1 + 1)"))))

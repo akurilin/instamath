@@ -16,13 +16,19 @@
     )
   )
 
+(defn operation
+  ([a] a)
+  ([a op b]
+   (op a b)))
+
 (def transform-options
-  {:integer #(Long/parseLong %)
-   :floating #(Double/parseDouble %)
+  {:expr operation
+   :term operation
+   :addsub pick-op
+   :multdiv pick-op
    :number identity
-   :op pick-op
-   :operation (fn [a op b] (op a b))
-   :expr identity})
+   :integer #(Long/parseLong %)
+   :floating #(Double/parseDouble %)})
 
 (defn math-eval
   [source & options]
@@ -31,10 +37,10 @@
                  (insta/parses math x)
                  (insta/parse math x))))
        ; ((fn [tree] (do (clojure.pprint/pprint tree) tree)))
+       ; ((fn [tree] (do (insta/visualize tree :output-file "out.png") tree)))
        (insta/transform transform-options)
        ; ((fn [res] (do (clojure.pprint/pprint res) res)))
-       
        ))
 
 ; (math-eval "1+1")
-; (math-eval "1")
+; (math-eval "1+1+1+1/2*2")

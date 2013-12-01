@@ -1,6 +1,9 @@
-expr = number | operation
-operation = number op number
-op = "+" | "-" | "/" | "*"
-number = integer | floating
+expr = expr addsub term | term
+term = term multdiv number | number
+number = integer | floating | lparen expr rparen
+<lparen> = <"(">
+<rparen> = <")">
+addsub = "+" | "-"
+multdiv = "/" | "*"
 floating = #"\d+\.\d+"
 integer = #"\d+"
