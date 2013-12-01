@@ -41,7 +41,8 @@
   (is (= 3 (math-eval "2 + 2 / 2")))
   (is (= 6 (math-eval "2 + 2 * 2")))
   (is (= 5 (math-eval "2 / 2 + 2 * 2")))
-  (is (= 5 (math-eval "3 * 2 - 1 + 3 / 3 - 1"))))
+  (is (= 5 (math-eval "3 * 2 - 1 + 3 / 3 - 1")))
+  (is (= 19 (math-eval "1 + 2 * 3 ^ 2"))))
 
 (deftest unary-operators
   (is (= -1 (math-eval "-1")))
@@ -53,6 +54,10 @@
   (is (= 16 (math-eval "(4 + 4) * 2")))
   (is (= 5 (math-eval "(1 + (1 + 1 + (1 + 1)))"))))
 
-(deftest exponent)
-(deftest square-root)
+(deftest exponent
+  (is (= 8 (math-eval "2^3"))))
+
+; (deftest square-root
+;   (is (= 4 ("√16"))))
+
 (deftest variables)

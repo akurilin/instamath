@@ -1,5 +1,6 @@
 (ns math-interp.core
-  (:require [instaparse.core :as insta]))
+  (:require [instaparse.core :as insta]
+            [clojure.math.numeric-tower :as tower]))
 
 ; To Investigate:
 ; * whitespace preprocessing vs whitespace in grammar
@@ -12,7 +13,9 @@
     "+" +
     "-" -
     "*" *
-    "/" /))
+    "/" /
+    "^" tower/expt
+    ))
 
 (defn operation
   ([a] a)
@@ -21,8 +24,10 @@
 (def transform-options
   {:expr operation
    :term operation
+   :factor operation
    :addsub pick-op
    :multdiv pick-op
+   :expsqrt pick-op
    :number identity
    :integer #(Long/parseLong %)
    :floating #(Double/parseDouble %)})
@@ -42,3 +47,4 @@
 ; (math-eval "1+1")
 ; (math-eval "1+1+1+1/2*2")
 ; (math-eval "-1")
+; (math-eval "2^6")
