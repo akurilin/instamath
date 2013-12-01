@@ -40,7 +40,7 @@
    :exp pick-op
    :sqrt pick-op
    :variable (partial interpolate env)
-   :number identity
+   :number operation
    :integer #(Long/parseLong %)
    :floating #(Double/parseDouble %)})
 
@@ -49,7 +49,7 @@
   ([source] (math-eval source {}))
   ([source env]
    (->> (clojure.string/replace source #"\s+" "")
-        ((partial insta/parse math))
+        math
         ; ((fn [tree] (do (clojure.pprint/pprint tree) tree)))
         ; ((fn [tree] (do (insta/visualize tree :output-file "out.png") tree)))
         (insta/transform (transform-options env))

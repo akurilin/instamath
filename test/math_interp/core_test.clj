@@ -57,11 +57,15 @@
 
 (deftest exponent
   (is (= 8 (math-eval "2^3")))
-  (is (= 8 (math-eval "(1+1)^(2+1)"))))
+  (is (= 8 (math-eval "(1+1)^(2+1)")))
+  (testing "right-associativity of ^"
+    (is (= 512 (math-eval "2^3^2")))))
 
 (deftest square-root
   (is (= 4 (math-eval "√(16)")))
-  (is (= 4 (math-eval "√(4*4)"))))
+  (is (= 4 (math-eval "√(4*4)")))
+  (testing "nesting of square roots"
+    (is (= 2 (math-eval "√√16")))))
 
 (deftest variables
   (is (= 13 (math-eval "x + 7" {:x 6})))

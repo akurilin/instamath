@@ -1,7 +1,7 @@
 expr     = expr addsub term | term
 term     = term multdiv factor | factor
-factor   = factor exp number | sqrt number | number
-number   = integer | floating | variable | lparen expr rparen
+factor   = number exp factor | number
+number   = integer | floating | variable | lparen expr rparen | sqrt number
 <lparen> = <"(">
 <rparen> = <")">
 addsub   = "+" | "-"
