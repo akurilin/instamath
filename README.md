@@ -1,14 +1,12 @@
-# math-interp
+# instamath
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library for interpreting simple TI-style math syntax by using
+instaparse
 
-## Usage
-
-FIXME
+Mostly useful as a starting point / example for people just getting started with
+instaparse. This should be a valid supplement for the existing documentation
+and examples.
 
 ## License
 
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+MIT License
